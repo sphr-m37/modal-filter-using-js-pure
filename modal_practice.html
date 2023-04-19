@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modal pro</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .container {
+        width: 80%;
+        max-width: 800px;
+        margin: auto;
+        padding: 20px 0;
+      }
+      .wraper {
+        width: 100%;
+        position: relative;
+      }
+      .wraper .btns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .wraper .btns button {
+        width: 32%;
+      }
+      .wraper .btns button:last-child {
+        width: 100%;
+        margin: 10px 0;
+      }
+      button {
+        padding: 10px;
+        background-color: royalblue;
+        border: none;
+        color: white;
+        text-transform: uppercase;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      button:hover {
+        letter-spacing: 2px;
+        background-color: dodgerblue;
+      }
+      .img-wraper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 5px;
+      }
+      .modal {
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transform: scale(0);
+        transition: transform 1s;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-img {
+        width: 400px;
+        perspective: 1000px;
+        transition: 14s;
+      }
+      .modal-img img {
+        transition: 0.1s;
+      }
+      .modal i {
+        color: white;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        text-transform: uppercase;
+        font-family: sans-serif;
+        font-size: 30px;
+        cursor: pointer;
+      }
+      .modal i:hover {
+        color: crimson;
+      }
+      /*  */
+      @media (max-width: 600px) {
+        .img-wraper {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 500px) {
+        .img-wraper {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wraper">
+        <div class="btns">
+          <button class="btn" data-target="animal">animal</button>
+          <button class="btn" data-target="city">city</button>
+          <button class="btn" data-target="other">other</button
+          ><button class="all" data-target="">all</button>
+        </div>
+        <div class="img-wraper">
+          <div class="col" data-select="animal">
+            <img src="images/animal1.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal2.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal3.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal4.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal5.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal6.jpg" alt="" />
+          </div>
+          <div class="col" data-select="animal">
+            <img src="images/animal7.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city1.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city2.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city3.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city4.jpg" alt="" />
+          </div>
+          <div class="col" data-select="city">
+            <img src="images/city5.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other1.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other2.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other3.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other4.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other5.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other6.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other7.jpg" alt="" />
+          </div>
+          <div class="col" data-select="other">
+            <img src="images/other8.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal">
+      <i>X</i>
+      <div class="modal-img">
+        <img src="images/ethan-weil-262745-unsplash.jpg" alt="" />
+      </div>
+    </div>
+    <script>
+      // uttilities
+      const imgWraper = document.querySelector(".img-wraper");
+      const modal = document.querySelector("div.modal");
+      const modalBox = document.querySelector("div.modal .modal-img");
+      const modalImg = document.querySelector("div.modal .modal-img img");
+      const allImgs = document.querySelectorAll(".img-wraper .col img");
+      const allcols = document.querySelectorAll(".img-wraper .col");
+      const btns = document.querySelector(".btns");
+      const btnAll = document.querySelector(".btns .all");
+      //open modal and set transformOrigin
+      imgWraper.addEventListener("click", (e) => {
+        if (e.target.tagName === "IMG") {
+          modal.style.transform = "scale(1)";
+          modalImg.src = e.target.src;
+          modal.style.transformOrigin = `
+       ${e.clientX}px
+        ${e.clientY}px
+        `;
+        }
+      });
+
+      //close modal when click that
+      modal.addEventListener("click", function (e) {
+        this.style.transform = "scale(0)";
+      });
+      modalImg.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+      //set rotate effect when hover modal img
+      modalBox.addEventListener("mousemove", function (e) {
+        const Xoffset = -(e.offsetY / 10 - 14);
+        const Yoffset = e.offsetX / 10 - 20;
+        modalImg.style.transform = ` rotateX(${Xoffset}deg) rotateY(${Yoffset}deg)`;
+        // console.log(e.offsetX)
+      });
+      modalBox.addEventListener("mouseleave", function (e) {
+        modalImg.style.transform = " rotate(0deg)";
+      });
+      //set gray effect  imgs
+      // imgWraper.addEventListener("mouseenter", function (e) {
+      //   allImgs.forEach((img) => {
+      //     img.style.filter = "grayscale(100%)";
+      //   });
+      // });
+      // //
+      // //
+      // //
+      // imgWraper.addEventListener("mouseleave", function () {
+      //   allImgs.forEach((img) => {
+      //     img.style.filter = "grayscale(0%)";
+      //   });
+      // });
+      //
+      //
+      //
+      // allImgs.forEach((img) => {
+      //   img.addEventListener("mouseenter", () => {
+      //     img.style.filter = "grayscale(0%)";
+      //   });
+      //   img.addEventListener("mouseleave", () => {
+      //     img.style.filter = "grayscale(100%)";
+      //   });
+      // });
+      for (const img of allImgs) {
+        img.addEventListener("mouseenter", function () {
+          allImgs.forEach((img) => {
+            img.style.filter = "grayscale(100%)";
+            this.style.filter = "grayscale(0)";
+          });
+        });
+
+        img.addEventListener("mouseleave", function () {
+          allImgs.forEach((img) => {
+            img.style.filter = "grayscale(0)";
+          });
+        });
+      }
+      //filter by btns
+
+      btns.addEventListener("click", function (e) {
+        if (e.target.className === "btn") {
+          const dataset = e.target.dataset.target;
+          allcols.forEach((col) => {
+            if (col.dataset.select === dataset) {
+              col.style.display = "block";
+            } else {
+              col.style.display = "none";
+            }
+          });
+        }
+      });
+      //
+      btnAll.addEventListener("click", function (e) {
+        allcols.forEach((col) => {
+          col.style.display = "block";
+        });
+      });
+    </script>
+  </body>
+</html>

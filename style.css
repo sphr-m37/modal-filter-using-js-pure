@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 15px;
+}
+
+.img-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.img-wrapper .col {
+    width: 32%;
+    margin-bottom: 15px;
+}
+
+.img-wrapper .col img {
+    transition: 0.4s;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.btn {
+    width: 32%;
+    margin-bottom: 5px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: royalblue;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+.btn:active {
+    background-color: crimson;
+}
+
+.btn:last-child {
+    width: 100%;
+}
+
+.modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.404), black);
+    transform: scale(0);
+    transition: transform 0.3s;
+}
+
+.modal i {
+    color: crimson;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-img {
+    width: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.modal .modal-img img {
+    transition: 0.2s;
+    border: 2px solid crimson;
+}
+
+/* responsive */
+@media (max-width: 1200px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 800px) {
+    .btn {
+        width: 49%;
+    }
+
+    .btn:nth-child(3) {
+        width: 100%;
+    }
+
+    .img-wrapper .col {
+        width: 49%;
+    }
+}
+
+@media (max-width: 500px) {
+    .btn {
+        width: 100%;
+    }
+
+    .img-wrapper .col {
+        width: 100%;
+    }
+}
